@@ -48,6 +48,9 @@
         <element id="library" level="project" name="Gradle: org.thymeleaf:thymeleaf:2.1.6.RELEASE" />
         <element id="library" level="project" name="Gradle: org.unbescape:unbescape:1.1.0.RELEASE" />
         <element id="library" level="project" name="Gradle: org.yaml:snakeyaml:1.17" />
+        <element id="library" level="project" name="Gradle: org.springframework.boot:spring-boot-starter-websocket:1.5.10.RELEASE" />
+        <element id="library" level="project" name="Gradle: org.springframework:spring-messaging:4.3.14.RELEASE" />
+        <element id="library" level="project" name="Gradle: org.springframework:spring-websocket:4.3.14.RELEASE" />
       </element>
     </root>
   </artifact>
