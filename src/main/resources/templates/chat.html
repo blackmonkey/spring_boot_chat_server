@@ -5,6 +5,9 @@
     <title>Simple Chat Room</title>
 </head>
 <style>
+.h1, h1 {
+    font-size: 20pt;
+}
 #msg_panel {
     width: 600px;
     height: 400px;
@@ -24,8 +27,19 @@ fieldset {
 }
 </style>
 <body>
-<h1>Simple Chat Room - <span th:text="${nickname}" /></h1>
 <table>
+    <tr>
+        <td>
+            <span class="h1">Simple Chat Room - </span>
+            <span class="h1" th:text="${nickname}" />
+        </td>
+        <td>
+            <form method="post" action="/logout">
+                <input name="nickname" type="hidden" th:value="${nickname}" />
+                <input type="submit" value="Logout" />
+            </form>
+        </td>
+    </tr>
     <tr valign="top">
         <td>
             <fieldset>
