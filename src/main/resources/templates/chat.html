@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Simple Chat Room</title>
+</head>
+<style>
+#msg_panel {
+    width: 600px;
+    height: 400px;
+    border: 1px solid #606060;
+}
+#users_list {
+    width: 100px;
+    height: 470px;
+    border: 1px solid #606060;
+}
+#new_msg {
+    width: 595px;
+    border: 1px solid #606060;
+}
+fieldset {
+    border: 1px solid #C0C0C0;
+}
+</style>
+<body>
+<h1>Simple Chat Room - <span th:text="${nickname}" /></h1>
+<table>
+    <tr valign="top">
+        <td>
+            <fieldset>
+                <legend>Message:</legend>
+                <div id="msg_panel"></div>
+            </fieldset>
+        </td>
+        <td rowspan="2">
+            <fieldset>
+                <legend>Current Users:</legend>
+                <select id="users_list" size="2"></select>
+            </fieldset>
+        </td>
+    </tr>
+    <tr valign="bottom">
+        <td>
+            <fieldset>
+                <legend>Please input your message and press ENTER to send:</legend>
+                <input id="nickname" type="hidden" th:value="${nickname}" />
+                <input id="new_msg" type="text" />
+            </fieldset>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

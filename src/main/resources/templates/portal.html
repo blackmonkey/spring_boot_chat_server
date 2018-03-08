@@ -2,10 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Chat Server Portal</title>
+    <title>Simple Chat Room</title>
 </head>
 <body>
+<h1>Simple Chat Room</h1>
 <p>Please input your name:</p>
-<input name="nickname" type="text" />
+<form method="post" action="/login">
+    <input name="nickname" type="text" />
+    <input type="submit" value="Login" />
+</form>
 </body>
 </html>
