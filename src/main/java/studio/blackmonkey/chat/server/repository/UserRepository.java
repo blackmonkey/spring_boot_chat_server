@@ -1,13 +1,14 @@
 package studio.blackmonkey.chat.server.repository;
 
 import org.springframework.stereotype.Service;
+import studio.blackmonkey.chat.server.Constant;
 import studio.blackmonkey.chat.server.model.User;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Service("UserRepository")
+@Service(Constant.SERVICE_USERS)
 public class UserRepository {
 
     private Map<String, User> mSessions = new ConcurrentHashMap<>();

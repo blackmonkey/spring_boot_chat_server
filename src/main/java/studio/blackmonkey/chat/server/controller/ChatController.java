@@ -5,6 +5,7 @@ import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import studio.blackmonkey.chat.server.Constant;
 import studio.blackmonkey.chat.server.model.User;
 import studio.blackmonkey.chat.server.repository.UserRepository;
 
@@ -18,18 +19,18 @@ public class ChatController {
     @Autowired
     private UserRepository mRepository;
 
-    @GetMapping("/chat")
+    @GetMapping(Constant.URL_CHATROOM)
     public String chatroom(HttpServletRequest request, Model model) throws AccessDeniedException {
-        User user = (User) request.getSession().getAttribute("user");
+        User user = (User) request.getSession().getAttribute(Constant.SESSION_VAR_USER);
         if (null == user) {
             throw new AccessDeniedException("login please");
         }
-        model.addAttribute("nickname", user.getNickname());
-        model.addAttribute("loginTime", user.getLoginTime());
-        return "chat";
+        model.addAttribute(Constant.TEMPLATE_VAR_NICKNAME, user.getNickname());
+        model.addAttribute(Constant.TEMPLATE_VAR_LOGIN_TIME, user.getLoginTime());
+        return Constant.TEMPLATE_CHATROOM;
     }
 
-    @SubscribeMapping("/chat.users")
+    @SubscribeMapping(Constant.WEBSOCKET_GET_USERS)
     public Collection<User> getUsers() {
         return mRepository.getUsers();
     }

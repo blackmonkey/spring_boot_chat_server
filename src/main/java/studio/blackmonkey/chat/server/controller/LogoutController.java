@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import studio.blackmonkey.chat.server.Constant;
 import studio.blackmonkey.chat.server.model.User;
 import studio.blackmonkey.chat.server.repository.UserRepository;
 
@@ -15,9 +16,9 @@ public class LogoutController {
     @Autowired
     private UserRepository mRepository;
 
-    @PostMapping("/logout")
-    public String logout(HttpServletRequest request, @RequestParam("nickname") User user) {
+    @PostMapping(Constant.URL_LOGOUT)
+    public String logout(HttpServletRequest request, @RequestParam(Constant.FORM_VAR_NICKNAME) User user) {
         mRepository.remove(request.getSession().getId());
-        return "redirect:/";
+        return Constant.URL_REDIR_HOME;
     }
 }
