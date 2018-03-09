@@ -18,6 +18,7 @@ public class LogoutController {
 
     @PostMapping(Constant.URL_LOGOUT)
     public String logout(HttpServletRequest request, @RequestParam(Constant.FORM_VAR_NICKNAME) User user) {
+        request.getSession().removeAttribute(Constant.SESSION_VAR_USER);
         mRepository.remove(request.getSession().getId());
         return Constant.URL_REDIR_HOME;
     }
