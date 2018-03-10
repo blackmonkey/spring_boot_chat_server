@@ -19,7 +19,8 @@ public class Constant {
 
     public static final String SESSION_VAR_USER = "user";
 
-    public static final String WEBSOCKET_GET_USERS = "/chat.users";
+    public static final String WEBSOCKET_USERS = "/chat.users";
+    public static final String WEBSOCKET_MESSAGE = "/chat.message";
 
     public static final String SERVICE_USERS = "UserRepository";
 }

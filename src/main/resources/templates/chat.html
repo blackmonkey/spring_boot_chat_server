@@ -19,7 +19,7 @@
     border: 1px solid #606060;
 }
 #new_msg {
-    width: 595px;
+    width: 555px;
     border: 1px solid #606060;
 }
 fieldset {
@@ -57,9 +57,10 @@ fieldset {
     <tr valign="bottom">
         <td>
             <fieldset>
-                <legend>Please input your message and press ENTER to send:</legend>
+                <legend>Please input your message:</legend>
                 <input id="nickname" type="hidden" th:value="${nickname}" />
                 <input id="new_msg" type="text" />
+                <input type="submit" value="Send" onclick="sendMessage()" />
             </fieldset>
         </td>
     </tr>

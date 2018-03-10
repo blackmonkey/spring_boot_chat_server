@@ -30,7 +30,7 @@ public class ChatController {
         return Constant.TEMPLATE_CHATROOM;
     }
 
-    @SubscribeMapping(Constant.WEBSOCKET_GET_USERS)
+    @SubscribeMapping(Constant.WEBSOCKET_USERS)
     public Collection<User> getUsers() {
         return mRepository.getUsers();
     }
