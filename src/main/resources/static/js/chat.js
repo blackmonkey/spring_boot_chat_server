@@ -7,6 +7,7 @@ var JSON_KEY_NICKNAME = 'nickname';
 var JSON_KEY_SENDER = 'sender';
 var JSON_KEY_RECEIVER = 'receiver';
 var JSON_KEY_CONTENT = 'content';
+var JSON_KEY_TIME = 'time';
 
 var PAT_RECEIVER = new RegExp('^@(\\S*)\\s+(.*)$', 'ig');
 
@@ -40,6 +41,14 @@ function onMessageReceived(message) {
     var sender = msgObj[JSON_KEY_SENDER];
     var receiver = msgObj[JSON_KEY_RECEIVER];
     var content = msgObj[JSON_KEY_CONTENT];
+    var time = msgObj[JSON_KEY_TIME];
+
+    var now = new Date();
+    now.setUTCHours(time[0]);
+    now.setUTCMinutes(time[1]);
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    time = '[' + (hour < 10 ? '0' + hour : hour) + ':' + (minute < 10 ? '0' + minute : minute) + '] ';
 
     var modSender = sender;
     var modReceiver = receiver;
@@ -67,6 +76,10 @@ function onMessageReceived(message) {
         title = modSender + ' said to ' + modReceiver + ': ';
     }
 
+    var timeNode = document.createElement('span');
+    timeNode.style.fontSize = 'small';
+    timeNode.textContent = time;
+
     var titleNode = document.createElement('span');
     titleNode.style.fontWeight = 'bold';
     titleNode.textContent = title;
@@ -75,6 +88,7 @@ function onMessageReceived(message) {
     contentNode.textContent = content;
 
     var msgNode = document.createElement('p');
+    msgNode.appendChild(timeNode);
     msgNode.appendChild(titleNode);
     msgNode.appendChild(contentNode);
 
@@ -101,10 +115,14 @@ function sendMessage() {
     }
     PAT_RECEIVER.lastIndex = 0;
 
+    var now = new Date();
+    var time = [now.getUTCHours(), now.getUTCMinutes()];
+
     var msgObj = {
         sender : curUser,
         receiver : receiver,
-        content : msg
+        content : msg,
+        time : time
     };
     client.send(WEBSOCKET_MESSAGE, {}, JSON.stringify(msgObj));
 
