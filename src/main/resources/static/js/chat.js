@@ -81,6 +81,15 @@ function onMessageReceived(message) {
     msgPanel.appendChild(msgNode);
 }
 
+function trySendMessage(inputObj, event) {
+    if (!event) {
+        event = window.event;
+    }
+    if (event.keyCode == 13) {
+        sendMessage();
+    }
+}
+
 function sendMessage() {
     var msg = msgBox.value;
     var receiver = '';

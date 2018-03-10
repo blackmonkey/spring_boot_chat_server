@@ -58,9 +58,9 @@ fieldset {
     <tr valign="bottom">
         <td>
             <fieldset>
-                <legend>Please input your message:</legend>
+                <legend>Please input your message, and press ENTER to send:</legend>
                 <input id="nickname" type="hidden" th:value="${nickname}" />
-                <input id="new_msg" type="text" />
+                <input id="new_msg" type="text" onkeydown="trySendMessage(this, event)" />
                 <input type="submit" value="Send" onclick="sendMessage()" />
             </fieldset>
         </td>
