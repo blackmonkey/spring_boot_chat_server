@@ -101,3 +101,13 @@ function sendMessage() {
 
     msgBox.value = '';
 }
+
+function setMsgReceiver(selectObj) {
+    var receiver = selectObj.options[selectObj.selectedIndex].value;
+    var msg = msgBox.value;
+    var res = PAT_RECEIVER.exec(msg);
+    if (res) {
+        msg = res[2];
+    }
+    msgBox.value = '@' + receiver + ' ' + msg;
+}
