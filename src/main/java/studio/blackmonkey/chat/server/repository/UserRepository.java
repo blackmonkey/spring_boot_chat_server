@@ -32,4 +32,14 @@ public class UserRepository {
     public boolean hasSession(String sessionId) {
         return mSessions.containsKey(sessionId);
     }
+
+    public boolean hasUser(String name) {
+        boolean res[] = new boolean[] {false};
+        mSessions.forEach((sessionId, user) -> {
+            if (user.getNickname().equals(name)) {
+                res[0] = true;
+            }
+        });
+        return res[0];
+    }
 }

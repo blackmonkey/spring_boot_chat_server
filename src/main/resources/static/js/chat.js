@@ -27,6 +27,7 @@ function onConnected() {
     client.subscribe(WEBSOCKET_LOGOUT, onUserLoggedOut);
     client.subscribe(WEBSOCKET_USERS, onUsersUpdated);
     client.subscribe(WEBSOCKET_RECEIVE_MSG, onMessageReceived);
+    client.subscribe(WEBSOCKET_RECEIVE_MSG + '/' + curUser, onMessageReceived);
 }
 
 function onError(error) {
@@ -85,7 +86,7 @@ function onMessageReceived(message) {
     // build message to post
     var title = '';
     if (sender == '') {
-        title = '[Broadcast] ';
+        title = '[System] ';
     } else if (receiver == '') {
         title = modSender + ' said: ';
     } else if (sender == receiver) {

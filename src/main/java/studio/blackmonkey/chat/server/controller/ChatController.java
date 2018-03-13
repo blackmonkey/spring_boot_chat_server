@@ -2,7 +2,7 @@ package studio.blackmonkey.chat.server.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +14,14 @@ import studio.blackmonkey.chat.server.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import java.nio.file.AccessDeniedException;
+import java.util.Calendar;
 import java.util.Collection;
 
 @Controller
 public class ChatController {
+
+    @Autowired
+    private SimpMessagingTemplate mTemplate;
 
     @Autowired
     private UserRepository mRepository;
@@ -39,8 +43,21 @@ public class ChatController {
     }
 
     @MessageMapping(Constant.WEBSOCKET_MSG)
-    @SendTo(Constant.WEBSOCKET_SEND_MSG)
-    public Message handleClientMessage(Message msg) {
-        return msg;
+    public void handleClientMessage(Message clientMsg) {
+        String receiver = clientMsg.getReceiver();
+        if (receiver == null || receiver.length() == 0 || mRepository.hasUser(receiver)) {
+            mTemplate.convertAndSend(Constant.WEBSOCKET_SEND_MSG, clientMsg);
+            return;
+        }
+
+        Message queryMsg = new Message();
+        queryMsg.setSender("");
+        queryMsg.setReceiver(clientMsg.getSender());
+        queryMsg.setContent("Sorry, '" + clientMsg.getReceiver() + "' is not here.");
+
+        Calendar cal = Calendar.getInstance();
+        queryMsg.setTime(new int[] {cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE)});
+
+        mTemplate.convertAndSend(Constant.WEBSOCKET_SEND_MSG + "/" + clientMsg.getSender(), queryMsg);
     }
 }
