@@ -8,6 +8,10 @@
 .h1, h1 {
     font-size: 20pt;
 }
+.errMsg {
+    color: red;
+    font-size: 10pt;
+}
 </style>
 <body>
 <h1>Simple Chat Room</h1>
@@ -16,5 +20,6 @@
     <input name="nickname" type="text" />
     <input type="submit" value="Login" />
 </form>
+<p class="errMsg" th:text="${errMsg}"></p>
 </body>
 </html>

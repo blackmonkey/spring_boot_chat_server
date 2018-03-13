@@ -14,6 +14,7 @@ public class Constant {
 
     public static final String TEMPLATE_VAR_NICKNAME = "nickname";
     public static final String TEMPLATE_VAR_LOGIN_TIME = "loginTime";
+    public static final String TEMPLATE_VAR_ERR_MSG = "errMsg";
 
     public static final String FORM_VAR_NICKNAME = "nickname";
 
