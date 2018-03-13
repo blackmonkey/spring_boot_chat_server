@@ -22,9 +22,10 @@ public class Constant {
     public static final String WEBSOCKET_BROADCAST_PREFIX = "/topic";
     public static final String WEBSOCKET_LISTEN_PREFIX = "/app";
     public static final String WEBSOCKET_USERS = "/chat.users";
-    public static final String WEBSOCKET_MESSAGE = "/chat.message";
+    public static final String WEBSOCKET_MSG = "/chat.message";
     public static final String WEBSOCKET_LOGIN = WEBSOCKET_BROADCAST_PREFIX + "/chat.login";
     public static final String WEBSOCKET_LOGOUT = WEBSOCKET_BROADCAST_PREFIX + "/chat.logout";
+    public static final String WEBSOCKET_SEND_MSG = WEBSOCKET_BROADCAST_PREFIX + WEBSOCKET_MSG;
 
     public static final String SERVICE_USERS = "UserRepository";
 }

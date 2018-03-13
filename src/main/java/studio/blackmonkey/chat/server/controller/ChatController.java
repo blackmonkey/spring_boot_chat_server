@@ -1,11 +1,14 @@
 package studio.blackmonkey.chat.server.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import studio.blackmonkey.chat.server.Constant;
+import studio.blackmonkey.chat.server.model.Message;
 import studio.blackmonkey.chat.server.model.User;
 import studio.blackmonkey.chat.server.repository.UserRepository;
 
@@ -33,5 +36,11 @@ public class ChatController {
     @SubscribeMapping(Constant.WEBSOCKET_USERS)
     public Collection<User> getUsers() {
         return mRepository.getUsers();
+    }
+
+    @MessageMapping(Constant.WEBSOCKET_MSG)
+    @SendTo(Constant.WEBSOCKET_SEND_MSG)
+    public Message handleClientMessage(Message msg) {
+        return msg;
     }
 }

@@ -1,7 +1,8 @@
 'use strict';
 
 var WEBSOCKET_USERS = '/app/chat.users';
-var WEBSOCKET_MESSAGE = '/topic/chat.message';
+var WEBSOCKET_SEND_MSG = '/app/chat.message';
+var WEBSOCKET_RECEIVE_MSG = '/topic/chat.message';
 var WEBSOCKET_LOGIN = "/topic/chat.login";
 var WEBSOCKET_LOGOUT = "/topic/chat.logout";
 
@@ -25,7 +26,7 @@ function onConnected() {
     client.subscribe(WEBSOCKET_LOGIN, onUserLoggedIn);
     client.subscribe(WEBSOCKET_LOGOUT, onUserLoggedOut);
     client.subscribe(WEBSOCKET_USERS, onUsersUpdated);
-    client.subscribe(WEBSOCKET_MESSAGE, onMessageReceived);
+    client.subscribe(WEBSOCKET_RECEIVE_MSG, onMessageReceived);
 }
 
 function onError(error) {
@@ -145,7 +146,7 @@ function sendMessage() {
         content : msg,
         time : time
     };
-    client.send(WEBSOCKET_MESSAGE, {}, JSON.stringify(msgObj));
+    client.send(WEBSOCKET_SEND_MSG, {}, JSON.stringify(msgObj));
 
     msgBox.value = '';
 }
