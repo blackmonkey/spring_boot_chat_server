@@ -14,7 +14,9 @@ import studio.blackmonkey.chat.server.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import java.nio.file.AccessDeniedException;
-import java.util.Calendar;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Collection;
 
 @Controller
@@ -55,8 +57,9 @@ public class ChatController {
         queryMsg.setReceiver(clientMsg.getSender());
         queryMsg.setContent("Sorry, '" + clientMsg.getReceiver() + "' is not here.");
 
-        Calendar cal = Calendar.getInstance();
-        queryMsg.setTime(new int[] {cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE)});
+        Instant instant = Instant.now();
+        OffsetDateTime dt = instant.atOffset(ZoneOffset.UTC);
+        queryMsg.setTime(new int[] {dt.getHour(), dt.getMinute()});
 
         mTemplate.convertAndSend(Constant.WEBSOCKET_SEND_MSG + "/" + clientMsg.getSender(), queryMsg);
     }
