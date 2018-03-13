@@ -2,6 +2,8 @@
 
 var WEBSOCKET_USERS = '/app/chat.users';
 var WEBSOCKET_MESSAGE = '/app/chat.message';
+var WEBSOCKET_LOGIN = "/topic/chat.login";
+var WEBSOCKET_LOGOUT = "/topic/chat.logout";
 
 var JSON_KEY_NICKNAME = 'nickname';
 var JSON_KEY_SENDER = 'sender';
@@ -20,12 +22,24 @@ var msgBox = document.getElementById('new_msg');
 var msgPanel = document.getElementById('msg_panel');
 
 function onConnected() {
+    client.subscribe(WEBSOCKET_LOGIN, onUserLoggedIn);
+    client.subscribe(WEBSOCKET_LOGOUT, onUserLoggedOut);
     client.subscribe(WEBSOCKET_USERS, onUsersUpdated);
     client.subscribe(WEBSOCKET_MESSAGE, onMessageReceived);
 }
 
 function onError(error) {
     alert('Could not connect to server: ' + error);
+}
+
+function onUserLoggedIn(message) {
+    var user = JSON.parse(message.body);
+    console.log('[login]' + user);
+}
+
+function onUserLoggedOut(message) {
+    var user = JSON.parse(message.body);
+    console.log('[logout]' + user);
 }
 
 function onUsersUpdated(message) {
