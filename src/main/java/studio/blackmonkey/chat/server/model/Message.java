@@ -2,6 +2,10 @@ package studio.blackmonkey.chat.server.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+
 public class Message {
 
     /*
@@ -43,5 +47,18 @@ public class Message {
 
     public void setTime(int[] time) {
         mTime = time;
+    }
+
+    public static Message warn(String receiver, String content) {
+        Message msg = new Message();
+        msg.setSender("");
+        msg.setReceiver(receiver);
+        msg.setContent(content);
+
+        Instant instant = Instant.now();
+        OffsetDateTime dt = instant.atOffset(ZoneOffset.UTC);
+        msg.setTime(new int[] {dt.getHour(), dt.getMinute()});
+
+        return msg;
     }
 }

@@ -14,9 +14,6 @@ import studio.blackmonkey.chat.server.repository.UserRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import java.nio.file.AccessDeniedException;
-import java.time.Instant;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import java.util.Collection;
 
 @Controller
@@ -52,15 +49,7 @@ public class ChatController {
             return;
         }
 
-        Message queryMsg = new Message();
-        queryMsg.setSender("");
-        queryMsg.setReceiver(clientMsg.getSender());
-        queryMsg.setContent("Sorry, '" + clientMsg.getReceiver() + "' is not here.");
-
-        Instant instant = Instant.now();
-        OffsetDateTime dt = instant.atOffset(ZoneOffset.UTC);
-        queryMsg.setTime(new int[] {dt.getHour(), dt.getMinute()});
-
-        mTemplate.convertAndSend(Constant.WEBSOCKET_SEND_MSG + "/" + clientMsg.getSender(), queryMsg);
+        Message warnMsg = Message.warn(clientMsg.getSender(), "Sorry, '" + clientMsg.getReceiver() + "' is not here.");
+        mTemplate.convertAndSend(Constant.WEBSOCKET_SEND_MSG + "/" + clientMsg.getSender(), warnMsg);
     }
 }
