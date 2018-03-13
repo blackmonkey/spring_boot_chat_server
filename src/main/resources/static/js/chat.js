@@ -34,12 +34,19 @@ function onError(error) {
 
 function onUserLoggedIn(message) {
     var user = JSON.parse(message.body);
-    console.log('[login]' + user);
+    var name = user[JSON_KEY_NICKNAME];
+    userList.add(new Option(name, name));
 }
 
 function onUserLoggedOut(message) {
     var user = JSON.parse(message.body);
-    console.log('[logout]' + user);
+    var name = user[JSON_KEY_NICKNAME];
+    for (var i = 0; i < userList.options.length; i++) {
+        if (userList.options[i].value == name) {
+            userList.remove(i);
+            i--;
+        }
+    }
 }
 
 function onUsersUpdated(message) {
