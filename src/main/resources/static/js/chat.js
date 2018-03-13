@@ -3,8 +3,8 @@
 var WEBSOCKET_USERS = '/app/chat.users';
 var WEBSOCKET_SEND_MSG = '/app/chat.message';
 var WEBSOCKET_RECEIVE_MSG = '/topic/chat.message';
-var WEBSOCKET_LOGIN = "/topic/chat.login";
-var WEBSOCKET_LOGOUT = "/topic/chat.logout";
+var WEBSOCKET_LOGIN = '/topic/chat.login';
+var WEBSOCKET_LOGOUT = '/topic/chat.logout';
 
 var JSON_KEY_NICKNAME = 'nickname';
 var JSON_KEY_SENDER = 'sender';
@@ -71,7 +71,7 @@ function onMessageReceived(message) {
     now.setUTCMinutes(time[1]);
     var hour = now.getHours();
     var minute = now.getMinutes();
-    time = '[' + (hour < 10 ? '0' + hour : hour) + ':' + (minute < 10 ? '0' + minute : minute) + '] ';
+    time = '[' + (hour < 10 ? ('0' + hour) : hour) + ':' + (minute < 10 ? ('0' + minute) : minute) + '] ';
 
     var modSender = sender;
     var modReceiver = receiver;
@@ -142,10 +142,10 @@ function sendMessage() {
     var time = [now.getUTCHours(), now.getUTCMinutes()];
 
     var msgObj = {
-        sender : curUser,
-        receiver : receiver,
-        content : msg,
-        time : time
+        sender: curUser,
+        receiver: receiver,
+        content: msg,
+        time: time
     };
     client.send(WEBSOCKET_SEND_MSG, {}, JSON.stringify(msgObj));
 
