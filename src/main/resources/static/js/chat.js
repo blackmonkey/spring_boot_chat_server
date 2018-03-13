@@ -1,7 +1,7 @@
 'use strict';
 
 var WEBSOCKET_USERS = '/app/chat.users';
-var WEBSOCKET_MESSAGE = '/app/chat.message';
+var WEBSOCKET_MESSAGE = '/topic/chat.message';
 var WEBSOCKET_LOGIN = "/topic/chat.login";
 var WEBSOCKET_LOGOUT = "/topic/chat.logout";
 
