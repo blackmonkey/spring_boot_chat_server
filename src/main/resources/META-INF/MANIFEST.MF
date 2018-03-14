@@ -21,7 +21,7 @@ Class-Path: ./lib/jackson-databind-2.8.10.jar ./lib/spring-expression-
  ib/log4j-over-slf4j-1.7.25.jar ./lib/thymeleaf-2.1.6.RELEASE.jar ./li
  b/spring-boot-autoconfigure-1.5.10.RELEASE.jar ./lib/jul-to-slf4j-1.7
  .25.jar ./lib/jboss-logging-3.3.1.Final.jar ./lib/spring-webmvc-4.3.1
- 4.RELEASE.jar ./lib/spring-boot-starter-websocket-1.5.10.RELEASE.jar
+ 4.RELEASE.jar ./lib/spring-boot-starter-websocket-1.5.10.RELEASE.jar 
  ./lib/spring-messaging-4.3.14.RELEASE.jar ./lib/spring-websocket-4.3.
  14.RELEASE.jar
 Main-Class: studio.blackmonkey.chat.server.MainApplication
