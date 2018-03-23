@@ -3,12 +3,6 @@ A practice project of Spring Boot, which implements a simple web chat service.
 
 After studied Spring, Spring Boot for a short time by reading tutorials from internet, I decide to start this project to practice.
 
-| Job               | Time Spent  |
-| ----------------- | ----------- |
-| Study Spring      | 17.25 hours |
-| Study Spring Boot | 1.75 hours  |
-| Implementing      | 21.5 hours  |
-
 ### Used frameworks:
 
 | Feature | Framework |
